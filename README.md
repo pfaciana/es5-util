@@ -39,3 +39,30 @@ toString(input, glue = ',', keyGlue = '=')
 toUnixTime(date = null, preserveJsMs = false)
 toUpperCase(input, option = null, preserveCase = true)
 ```
+
+## Comparing LoDash's Null/Nil/Empty to ES5 Util's Set/Empty
+
+```
+|        LoDash         |       isNotSet        | LDash |    isEmpty    |
+| ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
+| Undef | Null  |  Nil  | Strct | Loose |  Tag  | Empty | Strct | Loose |
+| ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
+|   x   |       |   x   |   x   |   x   |   x   |   x   |   x   |   x   | undefined
+|       |   x   |   x   |   x   |   x   |   x   |   x   |   x   |   x   | null
+|       |       |       |       |   x   |   x   |       |       |   x   | "undefined"
+|       |       |       |       |   x   |   x   |       |       |   x   | "null"
+|       |       |       |       |       |   x   |   x   |   x   |   x   | ""
+|       |       |       |       |       |       |   x   |   x   |   x   | false
+|       |       |       |       |       |       |   x   |   x   |   x   | 0
+|       |       |       |       |       |       |       |   x   |   x   | "0"
+|       |       |       |       |       |       |       |       |   x   | "false"
+|       |       |       |       |       |       |   x   |       |       | true
+|       |       |       |       |       |       |   x   |       |       | 1/any non-zero number
+|       |       |       |       |       |       |       |       |       | "1"
+|       |       |       |       |       |       |       |       |       | "true"/any non-empty string
+|       |       |       |       |       |       |   x   |   x   |   x   | []
+|       |       |       |       |       |       |       |       |       | [...]/any non-empty array
+|       |       |       |       |       |       |   x   |   x   |   x   | {}
+|       |       |       |       |       |       |       |       |       | {...}/any non-empty object
+| ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
+```
