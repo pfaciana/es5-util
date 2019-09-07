@@ -1,10 +1,10 @@
-function toArray(value) {
+function toArray(value, delimiter) {
 	if (typeof value === 'undefined' || value === null) {
 		return [];
 	}
 
 	if (typeof value === 'string') {
-		return value.length > 0 ? value.split('') : [value];
+		return value.length > 0 ? value.split(delimiter != null ? delimiter : '') : [value];
 	}
 
 	if (Array.isArray(value) || typeof value === 'object') {

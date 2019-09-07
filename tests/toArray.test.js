@@ -46,3 +46,20 @@ test.each(table)(
 		expect(toArray(input)).toStrictEqual(expected);
 	},
 );
+
+const tableDelimiter = [
+	['non-empty string', 'abc', undefined, ['a', 'b', 'c']],
+	['non-empty string', 'a,b,c', undefined, ['a', ',', 'b', ',', 'c']],
+	['non-empty string', 'a - b - c', undefined, ['a', ' ', '-', ' ', 'b', ' ', '-', ' ', 'c']],
+	['non-empty string', 'abc', '', ['a', 'b', 'c']],
+	['non-empty string', 'abc', ',', ['abc']],
+	['non-empty string', 'a,b,c', ',', ['a', 'b', 'c']],
+	['non-empty string', 'a - b - c', ' - ', ['a', 'b', 'c']],
+];
+
+test.each(tableDelimiter)(
+	'%s: toArray(%j, %s)',
+	(message, input, delimiter, expected) => {
+		expect(toArray(input, delimiter)).toStrictEqual(expected);
+	},
+);
