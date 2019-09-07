@@ -875,9 +875,10 @@ browserify-aes@^1.0.0, browserify-aes@^1.0.4:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-"browserify-buffer@github:pfaciana/browserify-buffer":
-  version "1.1.1"
-  resolved "https://codeload.github.com/pfaciana/browserify-buffer/tar.gz/167851f72095cbef62a51fe3f3729245fde288a5"
+browserify-buffer@^1:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/browserify-buffer/-/browserify-buffer-1.1.2.tgz#0d8aa7fe475dcf850a158eaf04dc74b1527862e8"
+  integrity sha512-udoWgt/ahQhg2WrJQ2DtT8Nrz1aOqpQiwlk+NERC9rYDu4jU57XoR0clZr99X+yy4KwmxTvPDBbPWNu4nxyn2g==
   dependencies:
     browserify "^16"
     clean-browserify-string "^1"
@@ -2236,16 +2237,18 @@ gulp-cli@^2.2.0:
     v8flags "^3.0.1"
     yargs "^7.1.0"
 
-"gulp-conditional-eol@github:pfaciana/gulp-conditional-eol":
-  version "1.1.0"
-  resolved "https://codeload.github.com/pfaciana/gulp-conditional-eol/tar.gz/ec492f7c8a5755b906a1abd28bdc5e99f56c431a"
+gulp-conditional-eol@^1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/gulp-conditional-eol/-/gulp-conditional-eol-1.1.1.tgz#9626a7df1ae5ad4bc88a7b88fe5a470c32e4213e"
+  integrity sha512-CeFgMYBVbYkSc60cVYDH9jRARbDs1DHkpaoseKHa4iXEEdY7B5WovV7BX/lJqAva29M+7Gztiq8W6aZS5R+Q2Q==
   dependencies:
     line-ending-corrector "^1"
     through2 "^2"
 
-"gulp-create-tasks@github:pfaciana/gulp-create-tasks":
+gulp-create-tasks@^1:
   version "1.2.1"
-  resolved "https://codeload.github.com/pfaciana/gulp-create-tasks/tar.gz/237f020a906a90ebe74b49f97e2e621fd02bcb94"
+  resolved "https://registry.yarnpkg.com/gulp-create-tasks/-/gulp-create-tasks-1.2.1.tgz#378259aae525c9d1e2d5cabb10c07913b8c36464"
+  integrity sha512-LnsONAVy5R74SgeK5QfmDYXwKo1RKuB9G1SzHyQvsZUwkvtmBPeDFUTZRnVsPsazKafoVEgXdWx6mr6w5MEuPw==
   dependencies:
     gulp "^4.0.1"
 
