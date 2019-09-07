@@ -1,2 +1,41 @@
-# es5-util
-A set of ES5 Utility functions can be either used in the browser or in Node.js
+# ES5 Utilities
+A set of lightweight ES5 Utility functions can be either used in the browser or in Node.js. Heavily inspired by [Locutus](http://locutus.io/php/) (formerly php.js), [lodash](https://lodash.com/docs/) and [PHP's Variable and Type Related Extensions](https://www.php.net/manual/en/refs.basic.vartype.php)
+
+## API
+```javascript
+castArray(input)
+findReplace(input, find, replace = '')
+inArray(needle, haystack, strict = false)
+isArrayLike(input)
+isArrayLikeObject(input)
+isEmptyLoose(input)
+isEmptyStrict(input)
+isInteger(input)
+isNotEmptyLoose(input)
+isNotEmptyStrict(input)
+isNotSetLoose(input)
+isNotSetStrict(input)
+isNotSetTag(input)
+isObject(input)
+isObjectLike(input)
+isPlainObject(input)
+isSetLoose(input)
+isSetStrict(input)
+isSetTag(input)
+round(input, precision = 0)
+safeParse(input)
+safeStringify(input, replacer = null, space = null, forceParse = false)
+substr(input, start, length = null, validatePositions = false)
+toArray(input)
+toAssociativeArray(input)
+toAssociativeObject(input)
+toAssociativeValues(input)
+toBytes(input, precision = 2)
+toInteger(input)
+toLowerCase(input, option = null, preserveCase = true)
+toNumber(input, precision = null)
+toPlainObject(input)
+toString(input, glue = ',', keyGlue = '=')
+toUnixTime(date = null, preserveJsMs = false)
+toUpperCase(input, option = null, preserveCase = true)
+```
