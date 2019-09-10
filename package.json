@@ -1,6 +1,6 @@
 {
 	"name": "es5-util",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"description": "A set of ES5 Utility functions can be either used in the browser or in Node.js",
 	"main": "index.js",
 	"repository": {
