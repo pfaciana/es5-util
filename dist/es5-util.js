@@ -27,6 +27,7 @@
 	1: [function (require, module, exports) {
 		module.exports.castArray = require('./js/castArray');
 		module.exports.findReplace = require('./js/findReplace');
+		module.exports.hasKeys = require('./js/hasKeys');
 		module.exports.inArray = require('./js/inArray');
 		module.exports.isArrayLike = require('./js/isArrayLike');
 		module.exports.isArrayLikeObject = require('./js/isArrayLikeObject');
@@ -67,39 +68,40 @@
 	}, {
 		"./js/castArray": 2,
 		"./js/findReplace": 3,
-		"./js/inArray": 4,
-		"./js/isArrayLike": 5,
-		"./js/isArrayLikeObject": 6,
-		"./js/isEmptyLoose": 7,
-		"./js/isEmptyStrict": 8,
-		"./js/isInteger": 9,
-		"./js/isNotEmptyLoose": 10,
-		"./js/isNotEmptyStrict": 11,
-		"./js/isNotSetLoose": 12,
-		"./js/isNotSetStrict": 13,
-		"./js/isNotSetTag": 14,
-		"./js/isObject": 15,
-		"./js/isObjectLike": 16,
-		"./js/isPlainObject": 17,
-		"./js/isSetLoose": 18,
-		"./js/isSetStrict": 19,
-		"./js/isSetTag": 20,
-		"./js/round": 21,
-		"./js/safeParse": 22,
-		"./js/safeStringify": 23,
-		"./js/substr": 24,
-		"./js/toArray": 25,
-		"./js/toAssociativeArray": 26,
-		"./js/toAssociativeObject": 27,
-		"./js/toAssociativeValues": 28,
-		"./js/toBytes": 29,
-		"./js/toInteger": 30,
-		"./js/toLowerCase": 31,
-		"./js/toNumber": 32,
-		"./js/toPlainObject": 33,
-		"./js/toString": 34,
-		"./js/toUnixTime": 35,
-		"./js/toUpperCase": 36
+		"./js/hasKeys": 4,
+		"./js/inArray": 5,
+		"./js/isArrayLike": 6,
+		"./js/isArrayLikeObject": 7,
+		"./js/isEmptyLoose": 8,
+		"./js/isEmptyStrict": 9,
+		"./js/isInteger": 10,
+		"./js/isNotEmptyLoose": 11,
+		"./js/isNotEmptyStrict": 12,
+		"./js/isNotSetLoose": 13,
+		"./js/isNotSetStrict": 14,
+		"./js/isNotSetTag": 15,
+		"./js/isObject": 16,
+		"./js/isObjectLike": 17,
+		"./js/isPlainObject": 18,
+		"./js/isSetLoose": 19,
+		"./js/isSetStrict": 20,
+		"./js/isSetTag": 21,
+		"./js/round": 22,
+		"./js/safeParse": 23,
+		"./js/safeStringify": 24,
+		"./js/substr": 25,
+		"./js/toArray": 26,
+		"./js/toAssociativeArray": 27,
+		"./js/toAssociativeObject": 28,
+		"./js/toAssociativeValues": 29,
+		"./js/toBytes": 30,
+		"./js/toInteger": 31,
+		"./js/toLowerCase": 32,
+		"./js/toNumber": 33,
+		"./js/toPlainObject": 34,
+		"./js/toString": 35,
+		"./js/toUnixTime": 36,
+		"./js/toUpperCase": 37
 	}], 2: [function (require, module, exports) {
 		function castArray() {
 			if (!arguments.length) {
@@ -130,6 +132,21 @@
 
 		module.exports = findReplace;
 	}, {}], 4: [function (require, module, exports) {
+		function hasKeys(object, path) {
+			var keys = path.split('.');
+
+			for (var index in keys) {
+				object = object[keys[index]];
+				if (typeof object === 'undefined') {
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		module.exports = hasKeys;
+	}, {}], 5: [function (require, module, exports) {
 		function inArray(needle, haystack, strict) {
 			strict = strict != null ? strict : false;
 
@@ -145,7 +162,7 @@
 		}
 
 		module.exports = inArray;
-	}, {}], 5: [function (require, module, exports) {
+	}, {}], 6: [function (require, module, exports) {
 		function isArrayLike(value) {
 			function isLength(length) {
 				return typeof length == 'number' && length > -1;
@@ -159,7 +176,7 @@
 		}
 
 		module.exports = isArrayLike;
-	}, {}], 6: [function (require, module, exports) {
+	}, {}], 7: [function (require, module, exports) {
 		function isArrayLikeObject(value) {
 			function isLength(length) {
 				return typeof length == 'number' && length > -1;
@@ -169,7 +186,7 @@
 		}
 
 		module.exports = isArrayLikeObject;
-	}, {}], 7: [function (require, module, exports) {
+	}, {}], 8: [function (require, module, exports) {
 		var isEmptyStrict = require('./isEmptyStrict');
 
 		function isEmptyLoose(value) {
@@ -181,7 +198,7 @@
 		}
 
 		module.exports = isEmptyLoose;
-	}, {"./isEmptyStrict": 8}], 8: [function (require, module, exports) {
+	}, {"./isEmptyStrict": 9}], 9: [function (require, module, exports) {
 		function isEmptyStrict(value) {
 			if (typeof value === 'object') {
 				for (var key in value) {
@@ -196,13 +213,13 @@
 		}
 
 		module.exports = isEmptyStrict;
-	}, {}], 9: [function (require, module, exports) {
+	}, {}], 10: [function (require, module, exports) {
 		function isInteger(value) {
 			return typeof value == 'number' && value == ~~value;
 		}
 
 		module.exports = isInteger;
-	}, {}], 10: [function (require, module, exports) {
+	}, {}], 11: [function (require, module, exports) {
 		var isEmptyLoose = require('./isEmptyLoose');
 
 		function isNotEmptyLoose(value) {
@@ -210,7 +227,7 @@
 		}
 
 		module.exports = isNotEmptyLoose;
-	}, {"./isEmptyLoose": 7}], 11: [function (require, module, exports) {
+	}, {"./isEmptyLoose": 8}], 12: [function (require, module, exports) {
 		var isEmptyStrict = require('./isEmptyStrict');
 
 		function isNotEmptyStrict(value) {
@@ -218,7 +235,7 @@
 		}
 
 		module.exports = isNotEmptyStrict;
-	}, {"./isEmptyStrict": 8}], 12: [function (require, module, exports) {
+	}, {"./isEmptyStrict": 9}], 13: [function (require, module, exports) {
 		var isSetLoose = require('./isSetLoose');
 
 		function isNotSetLoose(value) {
@@ -226,7 +243,7 @@
 		}
 
 		module.exports = isNotSetLoose;
-	}, {"./isSetLoose": 18}], 13: [function (require, module, exports) {
+	}, {"./isSetLoose": 19}], 14: [function (require, module, exports) {
 		var isSetStrict = require('./isSetStrict');
 
 		function isNotSetStrict(value) {
@@ -234,7 +251,7 @@
 		}
 
 		module.exports = isNotSetStrict;
-	}, {"./isSetStrict": 19}], 14: [function (require, module, exports) {
+	}, {"./isSetStrict": 20}], 15: [function (require, module, exports) {
 		var isSetTag = require('./isSetTag');
 
 		function isNotSetTag(value) {
@@ -242,19 +259,19 @@
 		}
 
 		module.exports = isNotSetTag;
-	}, {"./isSetTag": 20}], 15: [function (require, module, exports) {
+	}, {"./isSetTag": 21}], 16: [function (require, module, exports) {
 		function isObject(value) {
 			return (typeof value == 'object' || typeof value == 'function') && value !== null;
 		}
 
 		module.exports = isObject;
-	}, {}], 16: [function (require, module, exports) {
+	}, {}], 17: [function (require, module, exports) {
 		function isObjectLike(value) {
 			return typeof value == 'object' && value !== null;
 		}
 
 		module.exports = isObjectLike;
-	}, {}], 17: [function (require, module, exports) {
+	}, {}], 18: [function (require, module, exports) {
 		function isPlainObject(value) {
 			if (typeof value !== 'object' || value == null) {
 				return false;
@@ -266,25 +283,25 @@
 		}
 
 		module.exports = isPlainObject;
-	}, {}], 18: [function (require, module, exports) {
+	}, {}], 19: [function (require, module, exports) {
 		function isSetLoose(value) {
 			return ['undefined', 'null'].indexOf(String(value)) === -1;
 		}
 
 		module.exports = isSetLoose;
-	}, {}], 19: [function (require, module, exports) {
+	}, {}], 20: [function (require, module, exports) {
 		function isSetStrict(value) {
 			return value != null;
 		}
 
 		module.exports = isSetStrict;
-	}, {}], 20: [function (require, module, exports) {
+	}, {}], 21: [function (require, module, exports) {
 		function isSetTag(value) {
 			return ['undefined', 'null'].indexOf(String(value)) === -1 && value !== '';
 		}
 
 		module.exports = isSetTag;
-	}, {}], 21: [function (require, module, exports) {
+	}, {}], 22: [function (require, module, exports) {
 		function round(value, precision) {
 			precision |= 0;
 
@@ -297,7 +314,7 @@
 		}
 
 		module.exports = round;
-	}, {}], 22: [function (require, module, exports) {
+	}, {}], 23: [function (require, module, exports) {
 		/*
 		 * Protection against
 		 *  - undefined
@@ -319,7 +336,7 @@
 		}
 
 		module.exports = safeParse;
-	}, {}], 23: [function (require, module, exports) {
+	}, {}], 24: [function (require, module, exports) {
 		/*
 		 * Differs from just JSON.stringify because it does not escapes strings
 		 *
@@ -346,7 +363,7 @@
 		}
 
 		module.exports = safeStringify;
-	}, {"./safeParse": 22}], 24: [function (require, module, exports) {
+	}, {"./safeParse": 23}], 25: [function (require, module, exports) {
 		var toString = require('./toString');
 
 		function substr(string, start, length, validatePositions) {
@@ -372,14 +389,14 @@
 		}
 
 		module.exports = substr;
-	}, {"./toString": 34}], 25: [function (require, module, exports) {
-		function toArray(value) {
+	}, {"./toString": 35}], 26: [function (require, module, exports) {
+		function toArray(value, delimiter) {
 			if (typeof value === 'undefined' || value === null) {
 				return [];
 			}
 
 			if (typeof value === 'string') {
-				return value.length > 0 ? value.split('') : [value];
+				return value.length > 0 ? value.split(delimiter != null ? delimiter : '') : [value];
 			}
 
 			if (Array.isArray(value) || typeof value === 'object') {
@@ -396,7 +413,7 @@
 		}
 
 		module.exports = toArray;
-	}, {}], 26: [function (require, module, exports) {
+	}, {}], 27: [function (require, module, exports) {
 		function toAssociativeArray(obj) {
 			if (typeof obj === 'undefined') {
 				return [];
@@ -422,7 +439,7 @@
 		}
 
 		module.exports = toAssociativeArray;
-	}, {}], 27: [function (require, module, exports) {
+	}, {}], 28: [function (require, module, exports) {
 		var isPlainObject = require('./isPlainObject');
 
 		function toAssociativeObject(arr) {
@@ -450,7 +467,7 @@
 		}
 
 		module.exports = toAssociativeObject;
-	}, {"./isPlainObject": 17}], 28: [function (require, module, exports) {
+	}, {"./isPlainObject": 18}], 29: [function (require, module, exports) {
 		function toAssociativeValues(value) {
 			if (typeof value === 'undefined') {
 				return [];
@@ -472,7 +489,7 @@
 		}
 
 		module.exports = toAssociativeValues;
-	}, {}], 29: [function (require, module, exports) {
+	}, {}], 30: [function (require, module, exports) {
 		var toNumber = require('./toNumber');
 
 		function toBytes(value, precision) {
@@ -515,7 +532,7 @@
 		}
 
 		module.exports = toBytes;
-	}, {"./toNumber": 32}], 30: [function (require, module, exports) {
+	}, {"./toNumber": 33}], 31: [function (require, module, exports) {
 		function toInteger(value) {
 			if (value == Infinity) {
 				return 1.7976931348623157e+308;
@@ -525,7 +542,7 @@
 		}
 
 		module.exports = toInteger;
-	}, {}], 31: [function (require, module, exports) {
+	}, {}], 32: [function (require, module, exports) {
 		function toLowerCase(s, option, preserveCase) {
 			option = option != null ? option : null;
 			s = preserveCase || preserveCase == null ? String(s) : String(s).toUpperCase();
@@ -547,7 +564,7 @@
 		}
 
 		module.exports = toLowerCase;
-	}, {}], 32: [function (require, module, exports) {
+	}, {}], 33: [function (require, module, exports) {
 		var round = require('./round');
 
 		function toNumber(value, precision) {
@@ -565,7 +582,7 @@
 		}
 
 		module.exports = toNumber;
-	}, {"./round": 21}], 33: [function (require, module, exports) {
+	}, {"./round": 22}], 34: [function (require, module, exports) {
 		function toPlainObject(value) {
 			if (typeof value === 'string') {
 				value = value.split('');
@@ -583,7 +600,7 @@
 		}
 
 		module.exports = toPlainObject;
-	}, {}], 34: [function (require, module, exports) {
+	}, {}], 35: [function (require, module, exports) {
 		function toString(value, glue, keyGlue) {
 			if (typeof value === 'string') {
 				return value;
@@ -615,7 +632,7 @@
 		}
 
 		module.exports = toString;
-	}, {}], 35: [function (require, module, exports) {
+	}, {}], 36: [function (require, module, exports) {
 		var strtotime = require('locutus/php/datetime/strtotime');
 
 		function toUnixTime(date, preserveJsMs) {
@@ -644,7 +661,7 @@
 		}
 
 		module.exports = toUnixTime;
-	}, {"locutus/php/datetime/strtotime": 37}], 36: [function (require, module, exports) {
+	}, {"locutus/php/datetime/strtotime": 38}], 37: [function (require, module, exports) {
 		function toUpperCase(s, option, preserveCase) {
 			option = option != null ? option : null;
 			s = preserveCase || preserveCase == null ? String(s) : String(s).toLowerCase();
@@ -667,7 +684,7 @@
 		}
 
 		module.exports = toUpperCase;
-	}, {}], 37: [function (require, module, exports) {
+	}, {}], 38: [function (require, module, exports) {
 		'use strict';
 
 		var reSpace = '[ \\t]+';
