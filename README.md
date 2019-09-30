@@ -5,6 +5,9 @@ A set of lightweight ES5 Utility functions can be either used in the browser or 
 ```javascript
 castArray(input)
 findReplace(input, find, replace = '')
+getUID(length = 7, characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')
+getiUID(length = 7)
+getUID16(length = 7)
 hasKeys(object, path)
 inArray(needle, haystack, strict = false)
 isArrayLike(input)
