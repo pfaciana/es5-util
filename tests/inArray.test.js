@@ -68,7 +68,7 @@ const table = [
 
 test.each(table)(
 	'%j: inArray(needle: %j, strict: %s)',
-	(needle, haystack, strict, expected) => {
-		expect(inArray(haystack, needle, strict)).toStrictEqual(expected);
+	(haystack, needle, strict, expected) => {
+		expect(inArray(needle, haystack, strict)).toStrictEqual(expected);
 	},
 );
