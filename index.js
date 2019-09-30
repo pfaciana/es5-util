@@ -1,5 +1,8 @@
 module.exports.castArray = require('./js/castArray');
 module.exports.findReplace = require('./js/findReplace');
+module.exports.getUID = require('./js/getUID');
+module.exports.getiUID = require('./js/getUID').getiUID;
+module.exports.getUID16 = require('./js/getUID').getUID16;
 module.exports.hasKeys = require('./js/hasKeys');
 module.exports.inArray = require('./js/inArray');
 module.exports.isArrayLike = require('./js/isArrayLike');
