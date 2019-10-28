@@ -35,6 +35,7 @@ module.exports.toLowerCase = require('./js/toLowerCase');
 module.exports.toNumber = require('./js/toNumber');
 module.exports.toPlainObject = require('./js/toPlainObject');
 module.exports.toString = require('./js/toString');
+module.exports.toUnique = require('./js/toUnique');
 module.exports.toUnixTime = require('./js/toUnixTime');
 module.exports.toUpperCase = require('./js/toUpperCase');
 

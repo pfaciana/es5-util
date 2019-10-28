@@ -62,6 +62,7 @@
 		module.exports.toNumber = require('./js/toNumber');
 		module.exports.toPlainObject = require('./js/toPlainObject');
 		module.exports.toString = require('./js/toString');
+		module.exports.toUnique = require('./js/toUnique');
 		module.exports.toUnixTime = require('./js/toUnixTime');
 		module.exports.toUpperCase = require('./js/toUpperCase');
 
@@ -104,8 +105,9 @@
 		"./js/toNumber": 34,
 		"./js/toPlainObject": 35,
 		"./js/toString": 36,
-		"./js/toUnixTime": 37,
-		"./js/toUpperCase": 38
+		"./js/toUnique": 37,
+		"./js/toUnixTime": 38,
+		"./js/toUpperCase": 39
 	}], 2: [function (require, module, exports) {
 		function castArray() {
 			if (!arguments.length) {
@@ -666,6 +668,26 @@
 
 		module.exports = toString;
 	}, {}], 37: [function (require, module, exports) {
+		var inArray = require('./inArray');
+
+		function toUnique(duplicates, strict) {
+			var uniques = [];
+
+			strict = strict != null ? strict : false;
+
+			for (var index in duplicates) {
+				if (duplicates.hasOwnProperty(index)) {
+					if (!inArray(duplicates[index], uniques, strict)) {
+						uniques.push(duplicates[index]);
+					}
+				}
+			}
+
+			return uniques;
+		}
+
+		module.exports = toUnique;
+	}, {"./inArray": 6}], 38: [function (require, module, exports) {
 		var strtotime = require('locutus/php/datetime/strtotime');
 
 		function toUnixTime(date, preserveJsMs) {
@@ -694,7 +716,7 @@
 		}
 
 		module.exports = toUnixTime;
-	}, {"locutus/php/datetime/strtotime": 39}], 38: [function (require, module, exports) {
+	}, {"locutus/php/datetime/strtotime": 40}], 39: [function (require, module, exports) {
 		function toUpperCase(s, option, preserveCase) {
 			option = option != null ? option : null;
 			s = preserveCase || preserveCase == null ? String(s) : String(s).toLowerCase();
@@ -717,7 +739,7 @@
 		}
 
 		module.exports = toUpperCase;
-	}, {}], 39: [function (require, module, exports) {
+	}, {}], 40: [function (require, module, exports) {
 		'use strict';
 
 		var reSpace = '[ \\t]+';
