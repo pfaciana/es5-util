@@ -5,18 +5,18 @@
  *  - non parsable strings
  */
 
-function safeParse(data, convertScalarType) {
+function safeParse(data, forceParse) {
 	if (typeof data !== "string" || typeof data === "undefined") {
 		return data;
 	}
 
-	convertScalarType = convertScalarType != null ? convertScalarType : true;
+	forceParse = forceParse != null ? forceParse : true;
 
 	try {
 		var parsedData = JSON.parse(data.replace(/(\r\n|\n|\r|\t)/gm, ""));
 
-		if (!convertScalarType) {
-			return typeof parsedData !== 'object' || parsedData === null ? data : parsedData;
+		if (!forceParse && (typeof parsedData !== 'object' || parsedData === null)) {
+			return data;
 		}
 
 		return parsedData;
