@@ -357,14 +357,21 @@
 		 *  - non parsable strings
 		 */
 
-		function safeParse(data) {
+		function safeParse(data, forceParse) {
 			if (typeof data !== "string" || typeof data === "undefined") {
 				return data;
 			}
 
+			forceParse = forceParse != null ? forceParse : true;
+
 			try {
-				data = data.replace(/(\r\n|\n|\r|\t)/gm, "");
-				return JSON.parse(data);
+				var parsedData = JSON.parse(data.replace(/(\r\n|\n|\r|\t)/gm, ""));
+
+				if (!forceParse && (typeof parsedData !== 'object' || parsedData === null)) {
+					return data;
+				}
+
+				return parsedData;
 			} catch (e) {
 				return data;
 			}
