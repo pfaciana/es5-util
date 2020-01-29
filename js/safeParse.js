@@ -5,14 +5,21 @@
  *  - non parsable strings
  */
 
-function safeParse(data) {
+function safeParse(data, convertScalarType) {
 	if (typeof data !== "string" || typeof data === "undefined") {
 		return data;
 	}
 
+	convertScalarType = convertScalarType != null ? convertScalarType : true;
+
 	try {
-		data = data.replace(/(\r\n|\n|\r|\t)/gm, "");
-		return JSON.parse(data);
+		var parsedData = JSON.parse(data.replace(/(\r\n|\n|\r|\t)/gm, ""));
+
+		if (!convertScalarType) {
+			return typeof parsedData !== 'object' || parsedData === null ? data : parsedData;
+		}
+
+		return parsedData;
 	} catch (e) {
 		return data;
 	}
