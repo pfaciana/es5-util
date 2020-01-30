@@ -6,7 +6,7 @@
  */
 
 function safeParse(data, forceParse) {
-	if (typeof data !== "string" || typeof data === "undefined") {
+	if (typeof data !== "string") {
 		return data;
 	}
 
