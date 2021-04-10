@@ -1,4 +1,4 @@
-var strtotime = require('locutus/php/datetime/strtotime');
+var toTime = require('./toTime');
 
 function toUnixTime(date, preserveJsMs) {
 	date = ['undefined', 'null', 'false', 'true'].indexOf(String(date)) > -1 ? new Date() : date;
@@ -13,7 +13,7 @@ function toUnixTime(date, preserveJsMs) {
 	}
 
 	if (isNaN(date)) {
-		date = strtotime(date);
+		date = toTime(date);
 		return isNaN(date) || date === false ? NaN : date;
 	}
 

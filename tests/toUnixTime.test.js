@@ -22,12 +22,14 @@ const tableTimezone = [
 	['now', 'now', undefined, ~~(new Date().getTime() / 1000)],
 	['tomorrow', 'tomorrow', undefined, ~~(new Date().getTime() / 1000) + 86400],
 	['last week', 'last week', undefined, ~~(new Date().getTime() / 1000) - 604800],
+	['YYYYMMDDHHMMSS', '19820724011215', undefined, 396321135],
+	['YYYYMMDDHHMMSS JsMs', '19820724011215', true, 396321135000],
 ];
 
 test.each(tableTimezone)(
 	'%s: toString(%j)',
 	(message, input, preserveJsMs, expected) => {
-		expect(toUnixTime(input, preserveJsMs)).toBeCloseTo(expected, !isNaN(expected) ? -7 : undefined);
+		expect(toUnixTime(input, preserveJsMs)).toBeCloseTo(expected, !isNaN(expected) ? (preserveJsMs ? -8 : -7) : undefined);
 	},
 );
 
