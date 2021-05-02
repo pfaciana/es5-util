@@ -13,6 +13,10 @@ function safeParse(data, forceParse) {
 	forceParse = forceParse != null ? forceParse : true;
 
 	try {
+		if (data === 'NULL') {
+			data = 'null';
+		}
+
 		var parsedData = JSON.parse(data.replace(/(\r\n|\n|\r|\t)/gm, ""));
 
 		if (!forceParse && (typeof parsedData !== 'object' || parsedData === null)) {

@@ -17,6 +17,7 @@ Foo.prototype['3'] = 4;
 const table = [
 	// Scalars
 	['null string', 'null', null, true],
+	['NULL string', 'NULL', null, true, 'null'],
 	['true string', 'true', true, true],
 	['false string', 'false', false, true],
 	['empty number string', '0', 0, true],
@@ -52,8 +53,8 @@ const table = [
 
 test.each(table)(
 	'%s: safeParse(%j)',
-	(message, input, expected, preserveScalarType = false) => {
+	(message, input, expected, preserveScalarType = false, altExpected = null) => {
 		expect(safeParse(input)).toStrictEqual(expected);
-		expect(safeParse(input, false)).toStrictEqual(preserveScalarType ? input : expected);
+		expect(safeParse(input, false)).toStrictEqual(preserveScalarType ? (altExpected ? altExpected : input) : expected);
 	},
 );
