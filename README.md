@@ -3,8 +3,10 @@ A set of lightweight ES5 Utility functions can be either used in the browser or 
 
 ## API
 ```javascript
+arrayColumn(array, columnKey = null, indexKey = null)
 castArray(input)
 findReplace(input, find, replace = '')
+getFromObjPath(obj, path)
 getUID(length = 7, characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')
 getiUID(length = 7)
 getUID16(length = 7)

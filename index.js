@@ -1,4 +1,6 @@
+module.exports.arrayColumn = require('./js/arrayColumn');
 module.exports.castArray = require('./js/castArray');
+module.exports.getFromObjPath = require('./js/getFromObjPath');
 module.exports.findReplace = require('./js/findReplace');
 module.exports.getUID = require('./js/getUID');
 module.exports.getiUID = require('./js/getUID').getiUID;

@@ -7,7 +7,7 @@ const browserifyBuffer = require('browserify-buffer'),
 	gulpif = require('gulp-if'),
 	rename = require("gulp-rename"),
 	size = require('gulp-size'),
-	uglify = require('gulp-uglify');
+	terser = require('gulp-terser');
 
 const options = {
 	exclude: ['./**/*', '!./css/**/*', '!./fonts/**/*', '!./node_modules/**/*', '!./vendor/**/*',],
@@ -29,7 +29,7 @@ const builds = {
 			return gulp.src(_.src)
 				.pipe(gulpif(_.browserify, browserifyBuffer()))
 				.pipe(rename({basename: 'es5-util'}))
-				.pipe(gulpif(_.minify, uglify()))
+				.pipe(gulpif(_.minify, terser()))
 				.pipe(gulpif(_.minify, rename({suffix: '.min'})))
 				.pipe(gulpif(_.debug, debug(_.debug)))
 				.pipe(gulpif(_.minify && _.size, size(_.size)))

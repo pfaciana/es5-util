@@ -1,5 +1,7 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+module.exports.arrayColumn = require('./js/arrayColumn');
 module.exports.castArray = require('./js/castArray');
+module.exports.getFromObjPath = require('./js/getFromObjPath');
 module.exports.findReplace = require('./js/findReplace');
 module.exports.getUID = require('./js/getUID');
 module.exports.getiUID = require('./js/getUID').getiUID;
@@ -43,7 +45,28 @@ module.exports.toUpperCase = require('./js/toUpperCase');
 if (typeof window === 'object') {
 	window.es5utils = module.exports;
 }
-},{"./js/castArray":2,"./js/findReplace":3,"./js/getUID":4,"./js/hasKeys":5,"./js/inArray":6,"./js/isArrayLike":7,"./js/isArrayLikeObject":8,"./js/isEmptyLoose":9,"./js/isEmptyStrict":10,"./js/isInteger":11,"./js/isNotEmptyLoose":12,"./js/isNotEmptyStrict":13,"./js/isNotSetLoose":14,"./js/isNotSetStrict":15,"./js/isNotSetTag":16,"./js/isObject":17,"./js/isObjectLike":18,"./js/isPlainObject":19,"./js/isSetLoose":20,"./js/isSetStrict":21,"./js/isSetTag":22,"./js/round":23,"./js/safeParse":24,"./js/safeStringify":25,"./js/substr":26,"./js/toArray":27,"./js/toAssociativeArray":28,"./js/toAssociativeObject":29,"./js/toAssociativeValues":30,"./js/toBytes":31,"./js/toInteger":32,"./js/toLowerCase":33,"./js/toNumber":34,"./js/toPlainObject":35,"./js/toString":36,"./js/toUnique":38,"./js/toUnixTime":39,"./js/toUpperCase":40}],2:[function(require,module,exports){
+},{"./js/arrayColumn":2,"./js/castArray":3,"./js/findReplace":4,"./js/getFromObjPath":5,"./js/getUID":6,"./js/hasKeys":7,"./js/inArray":8,"./js/isArrayLike":9,"./js/isArrayLikeObject":10,"./js/isEmptyLoose":11,"./js/isEmptyStrict":12,"./js/isInteger":13,"./js/isNotEmptyLoose":14,"./js/isNotEmptyStrict":15,"./js/isNotSetLoose":16,"./js/isNotSetStrict":17,"./js/isNotSetTag":18,"./js/isObject":19,"./js/isObjectLike":20,"./js/isPlainObject":21,"./js/isSetLoose":22,"./js/isSetStrict":23,"./js/isSetTag":24,"./js/round":25,"./js/safeParse":26,"./js/safeStringify":27,"./js/substr":28,"./js/toArray":29,"./js/toAssociativeArray":30,"./js/toAssociativeObject":31,"./js/toAssociativeValues":32,"./js/toBytes":33,"./js/toInteger":34,"./js/toLowerCase":35,"./js/toNumber":36,"./js/toPlainObject":37,"./js/toString":38,"./js/toUnique":40,"./js/toUnixTime":41,"./js/toUpperCase":42}],2:[function(require,module,exports){
+const getFromObjPath = require('./getFromObjPath');
+
+function arrayColumn(array, columnKey = null, indexKey = null) {
+	if (indexKey !== null) {
+		let obj = {};
+		for (var index in array) {
+			if (array.hasOwnProperty(index) || typeof array[index] !== 'function') {
+				obj[getFromObjPath(array[index], indexKey)] = columnKey !== null ? (typeof columnKey === 'function' ? columnKey(array[index]) : getFromObjPath(array[index], columnKey)) : array[index];
+			}
+		}
+		return obj;
+	}
+
+	array = Array.isArray(array) ? array : Object.values(array);
+	return array.map(function (value, index) {
+		return typeof columnKey === 'function' ? columnKey(value) : getFromObjPath(value, columnKey);
+	})
+}
+
+module.exports = arrayColumn;
+},{"./getFromObjPath":5}],3:[function(require,module,exports){
 function castArray() {
 	if (!arguments.length) {
 		return [];
@@ -53,7 +76,7 @@ function castArray() {
 }
 
 module.exports = castArray;
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 function findReplace(string, find, replace) {
 	replace = replace != null ? replace : '';
 
@@ -72,7 +95,16 @@ function findReplace(string, find, replace) {
 }
 
 module.exports = findReplace;
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
+function getFromObjPath(obj, path) {
+	if (typeof path !== 'string' && !(path instanceof String)) {
+		return obj[path];
+	}
+	return path.split('.').reduce((o, i) => o[i], obj);
+}
+
+module.exports = getFromObjPath;
+},{}],6:[function(require,module,exports){
 function getUID(length, characters) {
 	var charactersLength, result = '';
 
@@ -101,7 +133,7 @@ module.exports.getiUID = getiUID;
 
 module.exports.getUID16 = getUID16;
 
-},{}],5:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 function hasKeys(object, path) {
 	var keys = path.split('.');
 
@@ -116,7 +148,7 @@ function hasKeys(object, path) {
 }
 
 module.exports = hasKeys;
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 function inArray(needle, haystack, strict) {
 	strict = strict != null ? strict : false;
 
@@ -132,7 +164,7 @@ function inArray(needle, haystack, strict) {
 }
 
 module.exports = inArray;
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 function isArrayLike(value) {
 	function isLength(length) {
 		return typeof length == 'number' && length > -1;
@@ -146,7 +178,7 @@ function isArrayLike(value) {
 }
 
 module.exports = isArrayLike;
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 function isArrayLikeObject(value) {
 	function isLength(length) {
 		return typeof length == 'number' && length > -1;
@@ -156,7 +188,7 @@ function isArrayLikeObject(value) {
 }
 
 module.exports = isArrayLikeObject;
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var isEmptyStrict = require('./isEmptyStrict');
 
 function isEmptyLoose(value) {
@@ -168,7 +200,7 @@ function isEmptyLoose(value) {
 }
 
 module.exports = isEmptyLoose;
-},{"./isEmptyStrict":10}],10:[function(require,module,exports){
+},{"./isEmptyStrict":12}],12:[function(require,module,exports){
 function isEmptyStrict(value) {
 	if (typeof value === 'object') {
 		for (var key in value) {
@@ -183,13 +215,13 @@ function isEmptyStrict(value) {
 }
 
 module.exports = isEmptyStrict;
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 function isInteger(value) {
 	return typeof value == 'number' && value == ~~value;
 }
 
 module.exports = isInteger;
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 var isEmptyLoose = require('./isEmptyLoose');
 
 function isNotEmptyLoose(value) {
@@ -197,7 +229,7 @@ function isNotEmptyLoose(value) {
 }
 
 module.exports = isNotEmptyLoose;
-},{"./isEmptyLoose":9}],13:[function(require,module,exports){
+},{"./isEmptyLoose":11}],15:[function(require,module,exports){
 var isEmptyStrict = require('./isEmptyStrict');
 
 function isNotEmptyStrict(value) {
@@ -205,7 +237,7 @@ function isNotEmptyStrict(value) {
 }
 
 module.exports = isNotEmptyStrict;
-},{"./isEmptyStrict":10}],14:[function(require,module,exports){
+},{"./isEmptyStrict":12}],16:[function(require,module,exports){
 var isSetLoose = require('./isSetLoose');
 
 function isNotSetLoose(value) {
@@ -213,7 +245,7 @@ function isNotSetLoose(value) {
 }
 
 module.exports = isNotSetLoose;
-},{"./isSetLoose":20}],15:[function(require,module,exports){
+},{"./isSetLoose":22}],17:[function(require,module,exports){
 var isSetStrict = require('./isSetStrict');
 
 function isNotSetStrict(value) {
@@ -221,7 +253,7 @@ function isNotSetStrict(value) {
 }
 
 module.exports = isNotSetStrict;
-},{"./isSetStrict":21}],16:[function(require,module,exports){
+},{"./isSetStrict":23}],18:[function(require,module,exports){
 var isSetTag = require('./isSetTag');
 
 function isNotSetTag(value) {
@@ -229,19 +261,19 @@ function isNotSetTag(value) {
 }
 
 module.exports = isNotSetTag;
-},{"./isSetTag":22}],17:[function(require,module,exports){
+},{"./isSetTag":24}],19:[function(require,module,exports){
 function isObject(value) {
 	return (typeof value == 'object' || typeof value == 'function') && value !== null;
 }
 
 module.exports = isObject;
-},{}],18:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 function isObjectLike(value) {
 	return typeof value == 'object' && value !== null;
 }
 
 module.exports = isObjectLike;
-},{}],19:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 function isPlainObject(value) {
 	if (typeof value !== 'object' || value == null) {
 		return false;
@@ -253,25 +285,25 @@ function isPlainObject(value) {
 }
 
 module.exports = isPlainObject;
-},{}],20:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 function isSetLoose(value) {
 	return ['undefined', 'null'].indexOf(String(value)) === -1;
 }
 
 module.exports = isSetLoose;
-},{}],21:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 function isSetStrict(value) {
 	return value != null;
 }
 
 module.exports = isSetStrict;
-},{}],22:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 function isSetTag(value) {
 	return ['undefined', 'null'].indexOf(String(value)) === -1 && value !== '';
 }
 
 module.exports = isSetTag;
-},{}],23:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 function round(value, precision) {
 	precision |= 0;
 
@@ -284,7 +316,7 @@ function round(value, precision) {
 }
 
 module.exports = round;
-},{}],24:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 /*
  * Protection against
  *  - undefined
@@ -317,7 +349,7 @@ function safeParse(data, forceParse) {
 }
 
 module.exports = safeParse;
-},{}],25:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 /*
  * Differs from just JSON.stringify because it does not escapes strings
  *
@@ -344,7 +376,7 @@ function safeStringify(data, replacer, space, forceParse) {
 }
 
 module.exports = safeStringify;
-},{"./safeParse":24}],26:[function(require,module,exports){
+},{"./safeParse":26}],28:[function(require,module,exports){
 var toString = require('./toString');
 
 function substr(string, start, length, validatePositions) {
@@ -370,7 +402,7 @@ function substr(string, start, length, validatePositions) {
 }
 
 module.exports = substr;
-},{"./toString":36}],27:[function(require,module,exports){
+},{"./toString":38}],29:[function(require,module,exports){
 function toArray(value, delimiter) {
 	if (typeof value === 'undefined' || value === null) {
 		return [];
@@ -394,7 +426,7 @@ function toArray(value, delimiter) {
 }
 
 module.exports = toArray;
-},{}],28:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 function toAssociativeArray(obj) {
 	if (typeof obj === 'undefined') {
 		return [];
@@ -420,7 +452,7 @@ function toAssociativeArray(obj) {
 }
 
 module.exports = toAssociativeArray;
-},{}],29:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 var isPlainObject = require('./isPlainObject');
 
 function toAssociativeObject(arr) {
@@ -448,7 +480,7 @@ function toAssociativeObject(arr) {
 }
 
 module.exports = toAssociativeObject;
-},{"./isPlainObject":19}],30:[function(require,module,exports){
+},{"./isPlainObject":21}],32:[function(require,module,exports){
 function toAssociativeValues(value) {
 	if (typeof value === 'undefined') {
 		return [];
@@ -470,7 +502,7 @@ function toAssociativeValues(value) {
 }
 
 module.exports = toAssociativeValues;
-},{}],31:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 var toNumber = require('./toNumber');
 
 function toBytes(value, precision) {
@@ -513,7 +545,7 @@ function toBytes(value, precision) {
 }
 
 module.exports = toBytes;
-},{"./toNumber":34}],32:[function(require,module,exports){
+},{"./toNumber":36}],34:[function(require,module,exports){
 function toInteger(value) {
 	if (value == Infinity) {
 		return 1.7976931348623157e+308;
@@ -523,7 +555,7 @@ function toInteger(value) {
 }
 
 module.exports = toInteger;
-},{}],33:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 function toLowerCase(s, option, preserveCase) {
 	option = option != null ? option : null;
 	s = preserveCase || preserveCase == null ? String(s) : String(s).toUpperCase();
@@ -545,7 +577,7 @@ function toLowerCase(s, option, preserveCase) {
 }
 
 module.exports = toLowerCase;
-},{}],34:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 var round = require('./round');
 
 function toNumber(value, precision) {
@@ -563,7 +595,7 @@ function toNumber(value, precision) {
 }
 
 module.exports = toNumber;
-},{"./round":23}],35:[function(require,module,exports){
+},{"./round":25}],37:[function(require,module,exports){
 function toPlainObject(value) {
 	if (typeof value === 'string') {
 		value = value.split('');
@@ -581,7 +613,7 @@ function toPlainObject(value) {
 }
 
 module.exports = toPlainObject;
-},{}],36:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 function toString(value, glue, keyGlue) {
 	if (typeof value === 'string') {
 		return value;
@@ -613,7 +645,7 @@ function toString(value, glue, keyGlue) {
 }
 
 module.exports = toString;
-},{}],37:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 'use strict';
 
 var reSpace = '[ \\t]+';
@@ -1740,7 +1772,7 @@ module.exports = function toTime(str, now) {
 
 	return Math.floor(result.toDate(new Date(now * 1000)) / 1000);
 };
-},{}],38:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 var inArray = require('./inArray');
 
 function toUnique(duplicates, strict) {
@@ -1760,7 +1792,7 @@ function toUnique(duplicates, strict) {
 }
 
 module.exports = toUnique;
-},{"./inArray":6}],39:[function(require,module,exports){
+},{"./inArray":8}],41:[function(require,module,exports){
 var toTime = require('./toTime');
 
 function toUnixTime(date, preserveJsMs) {
@@ -1789,7 +1821,7 @@ function toUnixTime(date, preserveJsMs) {
 }
 
 module.exports = toUnixTime;
-},{"./toTime":37}],40:[function(require,module,exports){
+},{"./toTime":39}],42:[function(require,module,exports){
 function toUpperCase(s, option, preserveCase) {
 	option = option != null ? option : null;
 	s = preserveCase || preserveCase == null ? String(s) : String(s).toLowerCase();

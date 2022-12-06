@@ -16,15 +16,15 @@
 	"devDependencies": {
 		"browserify-buffer": "^1",
 		"gulp": "^4.0.1",
-		"gulp-brotli": "^1",
+		"gulp-brotli": "^3",
 		"gulp-conditional-eol": "^1",
 		"gulp-create-tasks": "^1",
 		"gulp-debug": "^4",
-		"gulp-if": "^2",
-		"gulp-rename": "^1",
-		"gulp-size": "^3",
-		"gulp-uglify": "^3",
-		"jest": "^24"
+		"gulp-if": "^3",
+		"gulp-rename": "^2",
+		"gulp-size": "^4",
+		"gulp-terser": "^2",
+		"jest": "^29"
 	},
 	"dependencies": {}
 }
