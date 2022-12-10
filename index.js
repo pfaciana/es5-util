@@ -1,5 +1,6 @@
 module.exports.arrayColumn = require('./js/arrayColumn');
 module.exports.castArray = require('./js/castArray');
+module.exports.compare = require('./js/compare');
 module.exports.getFromObjPath = require('./js/getFromObjPath');
 module.exports.findReplace = require('./js/findReplace');
 module.exports.getKey = require('./js/getKey');
