@@ -1,15 +1,24 @@
 # ES5 Utilities
+
 A set of lightweight ES5 Utility functions can be either used in the browser or in Node.js. Heavily inspired by [Locutus](http://locutus.io/php/) (formerly php.js), [lodash](https://lodash.com/docs/) and [PHP's Variable and Type Related Extensions](https://www.php.net/manual/en/refs.basic.vartype.php)
 
 ## API
+
 ```javascript
 arrayColumn(array, columnKey = null, indexKey = null)
 castArray(input)
+compare(a, b)
+compare.upperFirst(a, b)
+compare.lowerFirst(a, b)
+compare.insensitive(a, b)
 findReplace(input, find, replace = '')
 getFromObjPath(obj, path)
+getKey(object, key)
+getKeys(object, path)
 getUID(length = 7, characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')
 getiUID(length = 7)
 getUID16(length = 7)
+hasKey(object, key)
 hasKeys(object, path)
 inArray(needle, haystack, strict = false)
 isArrayLike(input)
@@ -42,6 +51,8 @@ toLowerCase(input, option = null, preserveCase = true)
 toNumber(input, precision = null)
 toPlainObject(input)
 toString(input, glue = ',', keyGlue = '=')
+toTime(str, now)
+toUnique(duplicates, strict)
 toUnixTime(date = null, preserveJsMs = false)
 toUpperCase(input, option = null, preserveCase = true)
 ```
