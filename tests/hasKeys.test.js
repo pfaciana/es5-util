@@ -20,6 +20,11 @@ const object = {
 			c: 'd',
 		},
 	},
+	x: {
+		y: {
+			z: undefined,
+		}
+	},
 };
 
 const table = [
@@ -29,6 +34,8 @@ const table = [
 	['a.b', object, true],
 	['z.b', object, false],
 	['a.b.c', object, true],
+	['x.y.z', object, true],
+	['x.y.z.w', object, false],
 	['z.a.b.c', object, false],
 	['a.b.c.d', object, false],
 	['a.b.c.d', object, false],
@@ -42,6 +49,14 @@ const table = [
 	['a', new Foo, true],
 	['b', new Foo, true],
 	['a.b', new Foo, false],
+
+	// Edge cases
+	['a', 100, false],
+	[100, 'a', false],
+	[100, undefined, false],
+	[undefined, 'a', false],
+	[null, new Map, false],
+	[undefined, new Map, false],
 ];
 
 test.each(table)(
