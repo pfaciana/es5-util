@@ -71,7 +71,7 @@ const uSorted = [
 for (let i = 1; i <= 3; i++) {
 	test(`upper #${i}`, () => {
 		let resorted = shuffle(uSorted);
-		resorted.sort(compare.upper);
+		resorted.sort(compare.upperFirst);
 		expect(resorted).toEqual(uSorted);
 	});
 }
@@ -92,7 +92,7 @@ const lSorted = [
 for (let i = 1; i <= 3; i++) {
 	test(`lower #${i}`, () => {
 		let resorted = shuffle(lSorted);
-		resorted.sort(compare.lower);
+		resorted.sort(compare.lowerFirst);
 		expect(resorted).toEqual(lSorted);
 	});
 }

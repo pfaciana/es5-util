@@ -161,8 +161,8 @@ function compare(type = 'sort', locale = 'en-US') {
 }
 
 module.exports = compare();
-module.exports.upper = compare('u');
-module.exports.lower = compare('l');
+module.exports.upperFirst = compare('u');
+module.exports.lowerFirst = compare('l');
 module.exports.insensitive = compare('i');
 module.exports.compare = compare;
 },{}],5:[function(require,module,exports){
