@@ -59,7 +59,7 @@ const table = [
 expect(substr('abcdef', 4, -4, true)).toStrictEqual('cd');
 
 test.each(table)(
-	'%s: substr(%j)',
+	'%s: substr(%j, %j, %j) %j',
 	(message, input, start, length, expected) => {
 		expect(substr(input, start, length)).toStrictEqual(expected);
 	},
