@@ -15,6 +15,15 @@ function safeStringify(data, replacer, space, forceParse) {
 	replacer = replacer != null ? replacer : null;
 	space = space != null ? space : null;
 	forceParse = forceParse != null ? forceParse : false;
+	var stringData = String(data);
+
+	if (stringData == '0' && (1 / data) == -(1 / 0)) {
+		return '-0';
+	}
+
+	if (stringData === 'Infinity' || stringData === 'NaN') {
+		return stringData;
+	}
 
 	if (forceParse) {
 		data = safeParse(data);

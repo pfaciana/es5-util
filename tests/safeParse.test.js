@@ -21,6 +21,7 @@ const table = [
 	['true string', 'true', true, true],
 	['false string', 'false', false, true],
 	['empty number string', '0', 0, true],
+	['negative zero', '-0', -0, true],
 	['non-empty number string', '1', 1, true],
 	['non-empty number string int', ' 2 ', 2, true],
 	['non-empty number string float', ' 3.4 ', 3.4, true],
@@ -35,6 +36,8 @@ const table = [
 	['non-empty number 2', 2, 2, true],
 	['empty float', 0.0, 0.0, true],
 	['non-empty float', 1.1, 1.1, true],
+	['Infinity', Infinity, Infinity, true],
+	['NaN', NaN, NaN, true],
 	// Arrays
 	['empty array string', '[]', []],
 	['non-empty array string', '[1,2,3]', [1, 2, 3]],
