@@ -8,6 +8,7 @@ module.exports.getKeys = require('./js/getKeys');
 module.exports.getUID = require('./js/getUID');
 module.exports.getiUID = require('./js/getUID').getiUID;
 module.exports.getUID16 = require('./js/getUID').getUID16;
+module.exports.getValues = require('./js/getValues');
 module.exports.hasKey = require('./js/hasKey');
 module.exports.hasKeys = require('./js/hasKeys');
 module.exports.inArray = require('./js/inArray');
@@ -36,6 +37,7 @@ module.exports.toAssociativeArray = require('./js/toAssociativeArray');
 module.exports.toAssociativeObject = require('./js/toAssociativeObject');
 module.exports.toAssociativeValues = require('./js/toAssociativeValues');
 module.exports.toBytes = require('./js/toBytes');
+module.exports.toHtmlEntities = require('./js/toHtmlEntities');
 module.exports.toInteger = require('./js/toInteger');
 module.exports.toLowerCase = require('./js/toLowerCase');
 module.exports.toNumber = require('./js/toNumber');
@@ -44,6 +46,7 @@ module.exports.toString = require('./js/toString');
 module.exports.toUnique = require('./js/toUnique');
 module.exports.toUnixTime = require('./js/toUnixTime');
 module.exports.toUpperCase = require('./js/toUpperCase');
+module.exports.truncate = require('./js/truncate');
 
 if (typeof window === 'object') {
 	window.es5utils = module.exports;
