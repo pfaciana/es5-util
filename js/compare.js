@@ -10,7 +10,9 @@ function isCompound(value) {
 	return typeof value === 'object' || typeof value === 'function';
 }
 
-function compare(type = 'sort', locale = 'en-US') {
+function compare(type, locale) {
+	type = type != null ? type : 'sort';
+	locale = locale != null ? locale : 'en-US';
 	return function (a, b) {
 		if (a === b) {
 			return 0;

@@ -1,6 +1,9 @@
 const getFromObjPath = require('./getFromObjPath');
+const getValues = require('./getValues');
 
-function arrayColumn(array, columnKey = null, indexKey = null) {
+function arrayColumn(array, columnKey, indexKey) {
+	columnKey = columnKey != null ? columnKey : null;
+	indexKey = indexKey != null ? indexKey : null;
 	if (indexKey !== null) {
 		let obj = {};
 		for (var index in array) {
@@ -11,7 +14,7 @@ function arrayColumn(array, columnKey = null, indexKey = null) {
 		return obj;
 	}
 
-	array = Array.isArray(array) ? array : Object.values(array);
+	array = Array.isArray(array) ? array : getValues(array);
 	return array.map(function (value, index) {
 		return typeof columnKey === 'function' ? columnKey(value) : getFromObjPath(value, columnKey);
 	})

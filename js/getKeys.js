@@ -1,4 +1,5 @@
-function hasKeys(object, path, defaultValue = undefined) {
+function hasKeys(object, path, defaultValue) {
+	defaultValue = typeof defaultValue !== 'undefined' ? defaultValue : undefined;
 	if (typeof object !== 'object' || typeof path !== 'string') {
 		return defaultValue;
 	}
