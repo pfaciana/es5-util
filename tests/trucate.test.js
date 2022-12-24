@@ -19,6 +19,10 @@ const table = [
 	['[1,2,...', [1, 2, 3], 5, '...'],
 	[`{"a":1,"b":2,"c":3}`, {a: 1, b: 2, c: 3}, 9e9, '...'],
 	[`{"a":1,"b...`, {a: 1, b: 2, c: 3}, 9, '...'],
+
+	[`[...`, JSON.stringify([1, 2, 3], null, 1), input => input.split("\n").slice(0, 1).join("\n").length, '...'],
+	[`[\n 1,\n 2,...`, JSON.stringify([1, 2, 3], null, 1), input => input.split("\n").slice(0, 3).join("\n").length, '...'],
+	[`[\n 1,\n 2,\n 3\n]`, JSON.stringify([1, 2, 3], null, 1), input => input.split("\n").slice(0, 5).join("\n").length, '...'],
 ];
 
 test.each(table)(
