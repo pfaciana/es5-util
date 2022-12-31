@@ -276,7 +276,7 @@ function getValues(object) {
 module.exports = getValues;
 },{}],11:[function(require,module,exports){
 function hasKey(object, key) {
-	return typeof object === 'object' && key in object;
+	return typeof object === 'object' && object !== null && key in object;
 }
 
 module.exports = hasKey;
