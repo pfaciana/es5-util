@@ -54,6 +54,7 @@ const table = [
 	['a', 100, false],
 	[100, 'a', false],
 	[100, undefined, false],
+	[100, null, false],
 	[undefined, 'a', false],
 	[null, new Map, false],
 	[undefined, new Map, false],
