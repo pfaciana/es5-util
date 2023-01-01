@@ -1,4 +1,4 @@
-function hasKeys(object, path, defaultValue) {
+function getKeys(object, path, defaultValue) {
 	defaultValue = typeof defaultValue !== 'undefined' ? defaultValue : undefined;
 	if (typeof object !== 'object' || typeof path !== 'string') {
 		return defaultValue;
@@ -16,4 +16,4 @@ function hasKeys(object, path, defaultValue) {
 	return object;
 }
 
-module.exports = hasKeys;
+module.exports = getKeys;

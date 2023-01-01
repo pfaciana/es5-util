@@ -213,7 +213,7 @@ function getKey(object, key, defaultValue) {
 
 module.exports = getKey;
 },{}],8:[function(require,module,exports){
-function hasKeys(object, path, defaultValue) {
+function getKeys(object, path, defaultValue) {
 	defaultValue = typeof defaultValue !== 'undefined' ? defaultValue : undefined;
 	if (typeof object !== 'object' || typeof path !== 'string') {
 		return defaultValue;
@@ -231,7 +231,7 @@ function hasKeys(object, path, defaultValue) {
 	return object;
 }
 
-module.exports = hasKeys;
+module.exports = getKeys;
 },{}],9:[function(require,module,exports){
 function getUID(length, characters) {
 	var charactersLength, result = '';
